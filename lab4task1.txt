@@ -1,0 +1,117 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int rowCount();
+int colCount();
+int **inputTwoDimArr(int **twoDimArr, int rowSize, int colSize);
+int **transfArrayStepOne(int **twoDimArr, int rowSize, int colSize);
+void outputStepOne(int **twoDimArr, int rowSize, int colSize);
+double *transfArrayStepTwo(int **twoDimArr, int rowSize, int colSize);
+void outputStepTwo(double stepTwoArr[], int rowSize, int colSize);
+void deleteArrays(int **twoDimArr, double stepTwoArr[], int colSize);
+
+int **main() {
+	int rowSize = rowCount();
+	int colSize = colCount();
+	//2D Array for input variables
+	int **twoDimArr = new int*[rowSize];
+	for (int i = 0; i < rowSize; i++) {
+		twoDimArr[i] = new int[colSize];
+	}
+	int **twoDimArrayVar = inputTwoDimArr(twoDimArr, rowSize, colSize);
+	outputStepOne(transfArrayStepOne(twoDimArrayVar, rowSize, colSize), rowSize, colSize);
+	outputStepTwo(transfArrayStepTwo(transfArrayStepOne(twoDimArrayVar, rowSize, colSize), rowSize, colSize), rowSize, colSize);
+	
+	system("pause");
+	return twoDimArr;
+}
+//Creating 2D arr
+int twoDimArrFunc() {
+
+}
+
+int rowCount() {
+	int rowSize;
+	cout << "Enter number of rows: ";
+	cin >> rowSize;
+	return rowSize;
+}
+
+int colCount() {
+	int colSize;
+	cout << "Enter number of columns: ";
+	cin >> colSize;
+	return colSize;
+}
+
+int **inputTwoDimArr(int **twoDimArr, int rowSize, int colSize) {
+	for (int i = 0; i < rowSize; i++) {
+		for (int j = 0; j < colSize; j++) {
+
+			cout << i << " row for " << j << " variable in the row: ";
+			cin >> twoDimArr[i][j];
+		}
+
+	}
+	return twoDimArr;
+}
+//step 1 - tarnsformation array All negative elements 
+//should be replaced with their squares
+
+int **transfArrayStepOne(int **twoDimArr, int rowSize, int colSize) {
+	//new non negative array
+	for (int i = 0; i < rowSize; i++) {
+		for (int j = 0; j < colSize; j++) {
+			if (twoDimArr[i][j] < 0) {
+				twoDimArr[i][j] *= -1;
+			}
+		}
+	}
+	return twoDimArr;
+}
+
+void outputStepOne(int **twoDimArr, int rowSize, int colSize) {
+	cout << endl;
+	for (int i = 0; i < rowSize; i++) {
+		for (int j = 0; j < colSize; j++) {
+			cout << twoDimArr[i][j] << " ";
+		}
+		cout << endl;
+	}
+	cout << endl;
+}
+//step 2 - Square roots of diagonal elements
+
+double *transfArrayStepTwo(int **twoDimArr, int rowSize, int colSize) {
+	//new array for square roots of diagonal elements
+	double *stepTwoArr = new double[rowSize * colSize];
+	for (int i = 0; i < rowSize; i++) {
+		for (int j = 0; j < colSize; j++) {
+			if (i == j) {
+				stepTwoArr[i * rowSize + j] = sqrt(twoDimArr[i][j]);
+			}
+			else {
+				stepTwoArr[i * rowSize + j] = twoDimArr[i][j];
+			}
+		}
+	}
+	return stepTwoArr;
+}
+
+void outputStepTwo(double stepTwoArr[], int rowSize, int colSize) {
+	for (int k = 0; k < (rowSize * colSize); k++) {
+		cout << stepTwoArr[k] << " ";
+	}
+	cout << endl;
+}
+
+void deleteArrays(int **twoDimArr, double stepTwoArr[], int colSize) {
+
+	for (int j = 0; j < colSize; j++) {
+		delete[] twoDimArr[j];
+	}
+	delete [] twoDimArr;
+
+	delete [] stepTwoArr;
+}
