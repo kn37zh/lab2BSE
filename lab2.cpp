@@ -9,7 +9,7 @@ int main() {
 	using namespace std;
 	int n;
 	double xmin, xmax, dx;
-	cout << "Please enter only integer numbers for number n and don`t use any characters and symbols during that " << endl;
+	cout << "Please don`t use any characters and symbols for input n value" << endl;
 	cout << "Otherwise your result will be wrong" << endl;
 	cout << "Enter n: ";
 	cin >> n;
@@ -49,8 +49,6 @@ int main() {
 	else {
 		cout << "Error" << endl;
 	}
-
-
 	system("pause");
 	return 0;
 }
