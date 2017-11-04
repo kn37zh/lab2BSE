@@ -15,6 +15,7 @@ int main() {
 	cout << "What type of input do you prefer(file/console)?" << endl;
 	cin >> inputType;
 	if (inputType == file) {
+		system("cls");
 		ifstream inputFile;
 		inputFile.open("InputData.txt");
 		inputFile >> n;
@@ -22,19 +23,15 @@ int main() {
 		inputFile >> xmax;
 		inputFile >> dx;
 		inputFile.close();
-		//cout << "Your input from file is:" << endl;
-		//cout << "n = " << n << " xMin = " << xmin << " Xmax = " << xmax << " dx = " << dx << endl;
+		
 		if (n >= 3) {
 			calculating(n, xmin, xmax, dx);
 		}
-		else {
-			cout << "Error" << endl;
-		}
-	}
-	else if (inputType == console) {
-	
+	}else if (inputType == console) {
+		system("cls");
 		cout << "Enter integer n: ";
 		cin >> n;
+
 		if (n >= 3) {
 			cout << "Enter xMin, xMax, dx ";
 			cin >> xmin >> xmax >> dx;
@@ -53,7 +50,14 @@ int main() {
 }
 
 void calculating(int n, double xmin, double xmax, double dx) {
+	
+	fstream file;
+	file.open("OutputResult.txt", ios::out);
+	file << "";
+	file.close();
 	if (xmin < xmax && dx > 0) {
+		ofstream resultFile;
+		resultFile.open("OutputResult.txt");
 		for (dx; xmin <= xmax; xmin += dx) {
 			double y = 0;
 
@@ -71,8 +75,11 @@ void calculating(int n, double xmin, double xmax, double dx) {
 					y += prod;
 				}
 			}
+			resultFile << "x = " << xmin << " " << "y= " << y << "\r\n";
 			cout << "x = " << xmin << " " << "y= " << y << endl;
 		}
+		resultFile.close();
+		cout << "Your answer would be automaticly puted into txt file" << endl;
 	}
 	else {
 		cout << "Error" << endl;
