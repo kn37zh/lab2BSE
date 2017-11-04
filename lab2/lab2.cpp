@@ -7,17 +7,12 @@ int main() {
 	int n;
 	double xmin, xmax, dx;
 	cout << "Enter integer n: ";
-	//cin >> n;
-	ifstream inputFile;
-	inputFile.open("InputData.txt");
-	inputFile >> n;
+	cin >> n;
+
 	if (n >= 3) {
-		//cout << "Enter xMin, xMax, dx ";
-		//cin >> xmin >> xmax >> dx;
-		inputFile >> xmin;
-		inputFile >> xmax;
-		inputFile >> dx;
-		inputFile.close();
+		cout << "Enter xMin, xMax, dx ";
+		cin >> xmin >> xmax >> dx;
+
 		if (xmin < xmax && dx > 0) {
 			for (dx; xmin <= xmax; xmin += dx) {
 				double y = 0;
