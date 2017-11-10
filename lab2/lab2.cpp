@@ -79,7 +79,7 @@ void calculating(int n, double xmin, double xmax, double dx) {
 			cout << "x = " << xmin << " " << "y= " << y << endl;
 		}
 		resultFile.close();
-		cout << "Your answer would be automaticly puted into txt file" << endl;
+		cout << "Your answer would be automaticly putted into txt file" << endl;
 	}
 	else {
 		cout << "Error" << endl;
